@@ -5,6 +5,7 @@ const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const register = require('./controllers/register');
 const timeout = require('connect-timeout')
+const cors = require('cors');
 
 const { sequelize, Register } = require('./models/db');
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(timeout('5s'));
 app.use(haltOnTimedout);
+app.use(cors());
 
 function haltOnTimedout (req, res, next) {
   if (!req.timedout) next();
@@ -30,7 +32,7 @@ app.post('/user', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
+  res.status(err.error.status || 500);
   res.json(err);
 });
 
