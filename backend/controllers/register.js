@@ -3,7 +3,7 @@ const error = require('../utils/error');
 const _ = require('lodash');
 
 //TODO: should not take into account it upper or lower case etc, fix error messages
-const validCountries = ['Sweden', 'Denmark', 'Netherlands', 'Spain', 'Germany'];
+const validCountries = ['sweden', 'denmark', 'netherlands', 'spain', 'germany', 'france', 'russia', 'belgium', 'finland'];
 
 function create(user) {
 	const errors = {}; // refactor this
@@ -18,7 +18,7 @@ function create(user) {
 	if (!data.company || !_.isString(data.company)){
 		errors.company = ' Company cannot be empty';
 	}
-	if(!_.includes(validCountries, data.country)) {
+	if(!_.includes(validCountries, data.country.toLowerCase())) {
 		errors.validCountry = ' Not a valid country';
 	}
 	if (!_.isEmpty(errors)){
