@@ -16,11 +16,10 @@
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
-    "live-server": "^1.2.0",
+    "live-server": "1.2.0",
     "react": "15.6.1",
     "react-dom": "15.6.1",
-    "sweetalert2": "^7.22.2",
-    "validator": "8.0.0",
+    "sweetalert2": "7.22.2",
     "webpack": "3.1.0",
     "webpack-dev-server": "2.5.1"
   }

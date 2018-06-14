@@ -11,8 +11,8 @@ const AppRouter = () => (
     <div>
       <Header />
       <Switch>
-        <Route path="/" exact={true} component={FormSubmit}/>
-        <Route path="/users" exact={true} component={RegisteredUser}/>
+        <Route path="/users" exact={true} component={FormSubmit}/>
+        <Route path="/users/:id" exact={true} component={RegisteredUser}/>
         <Route component={NotFound}/>
       </Switch>
     </div>

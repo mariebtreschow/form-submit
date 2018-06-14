@@ -1,12 +1,22 @@
 import React from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import RegisteredUser from './RegisteredUser';
+import _ from 'lodash';
 
 export default class RegisterForm extends React.Component {
+
   constructor(props) {
     super(props);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.state = {
+      sumbit: false,
+      error: true,
+      timestamp: ''
+    }
   }
 
-  handleFormSubmit(e) {
+  handleFormSubmit = (e) => {
     e.preventDefault();
     const country = e.target.elements.country.value.trim();
     const company = e.target.elements.company.value.trim();
@@ -18,18 +28,32 @@ export default class RegisterForm extends React.Component {
       country: country
     })
     .then((response) => {
-      console.log(response);
-      //handle response save timestamp to render user from database and render other component
+      this.setState(() => { submit: !this.state.submit });
 
-    })
-    .catch((error) => {
-      console.log(error);
+      if (response.data.type === 'unique violation') {
+        return Swal({
+          type: 'error',
+          title: 'Validation issues',
+          text: response.data.message,
+        });
+      }
+      if (response.data.success) {
+        return swal('You are now registered!','success');
+      }
+    }).catch((error) => {
+      if (error.response && error.response.data.error) {
+        const listErrors = _.map(error.response.data.error.extra, values => values);
+        return Swal({
+          type: 'error',
+          title: 'Validation issues',
+          text: error.response.data.error.message,
+          text: `${listErrors}`
+        });
+      }
     });
-
   }
-  //add error information if provided wrong country etc, add dropdown for country?
 
-  render() {
+  render = () => {
     return (
       <div className="container-fluid">
         <div className="row">
