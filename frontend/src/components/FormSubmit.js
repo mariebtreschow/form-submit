@@ -10,12 +10,13 @@ export default class RegisterForm extends React.Component {
     super(props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
-      error: true,
+      error: '',
       timestamp: ''
     }
   }
 
   handleFormSubmit = (e) => {
+    console.log(this)
     e.preventDefault();
     const country = e.target.elements.country.value.trim();
     const company = e.target.elements.company.value.trim();
@@ -27,7 +28,9 @@ export default class RegisterForm extends React.Component {
       country: country
     })
     .then((response) => {
-      this.setState({ timestamp: response.data.timestamp });
+      this.setState({
+        timestamp: response.data.timestamp
+      });
 
       if (response.data.type === 'unique violation') {
         return Swal({
@@ -41,6 +44,10 @@ export default class RegisterForm extends React.Component {
       }
 
     }).catch((error) => {
+      this.setState({
+        error: error.response
+      });
+
       if (error.response && error.response.data.error) {
         const listErrors = _.map(error.response.data.error.extra, values => values);
         return Swal({
