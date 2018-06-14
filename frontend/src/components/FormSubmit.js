@@ -10,7 +10,6 @@ export default class RegisterForm extends React.Component {
     super(props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
-      sumbit: false,
       error: true,
       timestamp: ''
     }
@@ -28,7 +27,7 @@ export default class RegisterForm extends React.Component {
       country: country
     })
     .then((response) => {
-      this.setState(() => { submit: !this.state.submit });
+      this.setState({ timestamp: response.data.timestamp });
 
       if (response.data.type === 'unique violation') {
         return Swal({
@@ -38,8 +37,9 @@ export default class RegisterForm extends React.Component {
         });
       }
       if (response.data.success) {
-        return swal('You are now registered!','success');
+        return Swal('You are now registered!');
       }
+
     }).catch((error) => {
       if (error.response && error.response.data.error) {
         const listErrors = _.map(error.response.data.error.extra, values => values);
@@ -58,15 +58,15 @@ export default class RegisterForm extends React.Component {
       <div className="container-fluid">
         <div className="row">
           <form className="col-6 offset-3 pt-3" onSubmit={this.handleFormSubmit}>
-            <label for="username">Username:</label>
+            <label className="username" for="username">Username:</label>
             <div className="form-group">
               <input className="form-control" type="text" name="username" />
             </div>
-            <label for="company">Company:</label>
+            <label className="company" for="company">Company:</label>
             <div className="form-group">
               <input className="form-control" type="text" name="company" />
             </div>
-            <label for="Country">Country:</label>
+            <label className="country" for="country">Country:</label>
             <div className="form-group">
               <input className="form-control" type="text" name="country" />
             </div>

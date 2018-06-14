@@ -1,36 +1,38 @@
 import React from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 
 export default class RegisteredUser extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-      user : []
+      message: ''
     };
   }
 
   componentDidMount = () => {
     axios.get(`${process.env.BACKEND_HOST}/users/${this.props.match.params.id}`)
     .then((user) => {
-      if (user.data.message) {
-        this.setState(() => {
-          this.state.user.push(user.data.message);
+      let userInDb = user.data;
+
+      if (userInDb.message) {
+        this.setState({
+          message : user.data.message
         });
       }
-      this.setState(() => {
-        state.user.push(user.data);
-      });
+      this.setState({ user : userInDb });
 
     }).catch((error) => {
       console.log(error)
     });
   }
 
-  render = () => (
-      <div>
-        {this.state.user}
+  render = () => {
+    return (
+      <div className="user">
+        {this.state.user ? this.state.user.country : this.state.message}
       </div>
     );
-
+  }
 }
