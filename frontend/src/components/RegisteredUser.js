@@ -8,7 +8,7 @@ export default class RegisteredUser extends React.Component {
   render = () => {
     return (
       <div>
-      
+        <p>Where We render the user</p>
       </div>
     );
   };

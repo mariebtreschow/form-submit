@@ -39,7 +39,7 @@ export default class RegisterForm extends React.Component {
             <div className="form-group">
               <input className="form-control" type="text" name="country" />
             </div>
-            <button className="button btn btn-primary btn-lg">Register</button>
+            <button className="button btn btn-primary btn-lg btn-block">Register</button>
           </form>
         </div>
       </div>
