@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const NotFound = () => (
-  <div>
-    Not found 404
+  <div className="not-found">
+  404: Nothing here to see..
   </div>
 );
 
