@@ -1,16 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FormSubmit from './components/FormSubmit';
-
-const Layout = (props) => {
-  return(
-    <div>
-      <p>header</p>
-      {props.children}
-      <p>footer</p>
-    </div>
-  );
-};
+import AppRouter from './routers/AppRouter';
+import './styles/styles.scss';
 
 
-ReactDOM.render(<FormSubmit />, document.getElementById('app'));
+ReactDOM.render(<AppRouter />, document.getElementById('app'));
