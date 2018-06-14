@@ -1,10 +1,17 @@
 body {
-  font-family: Arial;
+  font-family: sans-serif;
   padding-top: 5rem;
+  background: #474956;
+  color: #d3d3d3;
 }
 
 h1 {
   text-align: center;
+}
+
+.button.btn.btn-primary.btn-lg.btn-block {
+	background-color: #0f0a0f;
+	border-color: #0f0a0f;
 }
 
 .not-found {
@@ -20,19 +27,13 @@ h1 {
 }
 
 .username {
-  font-weight: bold;
   font-size: 1.2rem;
-
 }
 
 .company {
-  font-weight: bold;
   font-size: 1.2rem;
-
 }
 
 .country {
-  font-weight: bold;
   font-size: 1.2rem;
-
 }
