@@ -23,7 +23,7 @@ function getUser(timestamp) {
     }
   }).then((user) => {
     if (!user) {
-      return { message: `No user with this timestamp`}; 
+      return { message: `No user with this timestamp`};
     }
     return user;
   }).catch((err) => {

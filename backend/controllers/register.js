@@ -2,23 +2,23 @@ const registerModel = require('../models/register');
 const error = require('../utils/error');
 const _ = require('lodash');
 
-const validCountries = ['Sweden', 'Denmark', 'Netherlands', 'Spain', 'Germany'];
+const validCountries = ['sweden', 'denmark', 'netherlands', 'spain', 'germany', 'france', 'russia', 'belgium', 'finland'];
 
 function create(user) {
 	const errors = {}; // refactor this
 	const data = _.pick(user, ['username', 'company', 'country']);
 
-	if (!_.isString(data.country)){
-		errors.country = 'must be a string';
+	if (!data.country || !_.isString(data.country)){
+		errors.country = ' Country cannot be empty';
 	}
-	if (!_.isString(data.username)){
-		errors.username = 'must be a string';
+	if (!data.username || !_.isString(data.username)){
+		errors.username = ' Username cannot be empty';
 	}
-	if (!_.isString(data.company)){
-		errors.company = 'must be a string';
+	if (!data.company || !_.isString(data.company)){
+		errors.company = ' Company cannot be empty';
 	}
-	if(!_.includes(validCountries, data.country)) {
-		errors.validCountry = 'not a valid country';
+	if(!_.includes(validCountries, data.country.toLowerCase())) {
+		errors.validCountry = ' Not a valid country';
 	}
 	if (!_.isEmpty(errors)){
 		throw error.createError(403, 'There are some validation issues', errors);
