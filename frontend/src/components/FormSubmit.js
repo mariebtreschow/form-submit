@@ -16,7 +16,6 @@ export default class RegisterForm extends React.Component {
   }
 
   handleFormSubmit = (e) => {
-    console.log(this)
     e.preventDefault();
     const country = e.target.elements.country.value.trim();
     const company = e.target.elements.company.value.trim();
@@ -61,6 +60,13 @@ export default class RegisterForm extends React.Component {
   }
 
   render = () => {
+    if (this.state.timestamp) {
+      return (
+        <RegisteredUser
+          timestamp={this.state.timestamp}
+        />
+      )
+    }
     return (
       <div className="container-fluid">
         <div className="row">
