@@ -34,15 +34,15 @@ export default class RegisterForm extends React.Component {
       <div className="container-fluid">
         <div className="row">
           <form className="col-6 offset-3 pt-3" onSubmit={this.handleFormSubmit}>
-            <label for="username">Username</label>
+            <label for="username">Username:</label>
             <div className="form-group">
               <input className="form-control" type="text" name="username" />
             </div>
-            <label for="company">Company</label>
+            <label for="company">Company:</label>
             <div className="form-group">
               <input className="form-control" type="text" name="company" />
             </div>
-            <label for="Country">Country</label>
+            <label for="Country">Country:</label>
             <div className="form-group">
               <input className="form-control" type="text" name="country" />
             </div>
