@@ -2,7 +2,6 @@ const registerModel = require('../models/register');
 const error = require('../utils/error');
 const _ = require('lodash');
 
-//TODO: should not take into account it upper or lower case etc, fix error messages
 const validCountries = ['sweden', 'denmark', 'netherlands', 'spain', 'germany', 'france', 'russia', 'belgium', 'finland'];
 
 function create(user) {
