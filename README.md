@@ -2,6 +2,19 @@
 
 Register a User with username, company name and country information.
 
-- Username: must be unique
+- Username:
+  Must be unique and at least 5 character
+
 - Company
-- Country (Only for certain countries)
+
+- Country
+  Must be one of the following:
+  - Sweden
+  - Denmark
+  - Netherlands
+  - Spain
+  - Germany
+  - France
+  - Russia
+  - Belgium
+  - Finland

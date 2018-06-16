@@ -3,7 +3,7 @@ const assert = require('chai').assert
 const { Register } = require('../models/db');
 let testUser;
 
-after(() => {
+afterEach(() => {
   return Register.destroy({
     where: {
       username: ['marieTest', 'marieTest2']
@@ -39,11 +39,13 @@ describe('Create User =>', () => {
       company: 'MOBGEN',
       country: 'Denmark'
     };
-    register.create(data).then((err) => {
-      assert.isObject(err, 'must return a user object');
-      assert.equal(err.message, 'username must be unique');
-      assert.equal(err.type, 'unique violation');
-      done();
+    register.create(data).then(() => {
+      register.create(data).then((err) => {
+        assert.isObject(err, 'must return a user object');
+        assert.equal(err.message, 'username must be unique');
+        assert.equal(err.type, 'unique violation');
+        done();
+      });
     });
   });
   it('should not be able to create a user with too short username', (done) => {
