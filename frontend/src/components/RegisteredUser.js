@@ -28,16 +28,17 @@ export default class RegisteredUser extends React.Component {
     axios.get(`${process.env.BACKEND_HOST}/users/${this.props.timestamp ? this.props.timestamp : this.props.match.params.id}`)
     .then((user) => {
       let userInDb = user.data;
-      if (userInDb.message) {
-        this.setState({
-          message : userInDb.message
-        });
-      }
+
       if (validateUser(userInDb)){
         this.setState({ user : userInDb });
       }
+      if (userInDb.message) {
+        this.setState({ message : userInDb.message });
+      }
     }).catch((error) => {
-      console.log(error);
+      this.setState({
+        message : 'Something happened while retrieving the user!'
+      });
     });
   }
 
@@ -94,16 +95,17 @@ export default class RegisteredUser extends React.Component {
           </Row>
         </Container>
       );
+    } else {
+      return (
+        <Container className="userNotFound">
+          <Row>
+            <Col sm={{ size: 6,  offset: 3 }}>
+              <p>Sorry! {this.state.message}...</p>
+            </Col>
+          </Row>
+          <Button onClick={this.handleClick}>Go Back</Button>
+        </Container>
+      );
     }
-    return (
-      <Container className="userNotFound">
-        <Row>
-          <Col sm={{ size: 6,  offset: 3 }}>
-            <p>Sorry! {this.state.message}...</p>
-          </Col>
-        </Row>
-        <Button onClick={this.handleClick}>Go Back</Button>
-      </Container>
-    );
   }
 }

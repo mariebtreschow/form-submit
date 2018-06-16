@@ -3,7 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Redirect } from 'react-router';
 import { FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
-import { Container} from 'reactstrap';
+import { Container } from 'reactstrap';
 import generateMessage from '../lib/error-handler';
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory();
@@ -15,8 +15,7 @@ export default class RegisterForm extends React.Component {
     super(props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
-      error: '',
-      timestamp: ''
+      error: ''
     }
   }
 
@@ -64,7 +63,7 @@ export default class RegisterForm extends React.Component {
   render = () => {
     return (
         <Container>
-          <form className="col-6 offset-3" onSubmit={this.handleFormSubmit}>
+          <form className="col-8 offset-2" onSubmit={this.handleFormSubmit}>
              <FormGroup bsSize="large">
              <ControlLabel className="username">Username:</ControlLabel>
                <FormControl
