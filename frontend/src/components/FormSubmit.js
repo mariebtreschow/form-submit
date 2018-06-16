@@ -2,7 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import RegisteredUser from './RegisteredUser';
+import { FormGroup, Button, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import { Container} from 'reactstrap';
 import _ from 'lodash';
+import generateMessage from '../lib/error-handler';
 
 export default class RegisterForm extends React.Component {
 
@@ -30,7 +33,6 @@ export default class RegisterForm extends React.Component {
       this.setState({
         timestamp: response.data.timestamp
       });
-
       if (response.data.type === 'unique violation') {
         return Swal({
           type: 'error',
@@ -41,19 +43,17 @@ export default class RegisterForm extends React.Component {
       if (response.data.success) {
         return Swal('You are now registered!');
       }
-
     }).catch((error) => {
       this.setState({
         error: error.response
       });
-
       if (error.response && error.response.data.error) {
+        const message = error.response.data.error.message;
         const listErrors = _.map(error.response.data.error.extra, values => values);
         return Swal({
           type: 'error',
           title: 'Validation issues',
-          text: error.response.data.error.message,
-          text: `${listErrors}`
+          html: generateMessage(message, listErrors),
         });
       }
     });
@@ -62,31 +62,39 @@ export default class RegisterForm extends React.Component {
   render = () => {
     if (this.state.timestamp) {
       return (
-        <RegisteredUser
-          timestamp={this.state.timestamp}
-        />
-      )
+        <RegisteredUser timestamp={this.state.timestamp}/>
+      );
     }
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <form className="col-6 offset-3 pt-3" onSubmit={this.handleFormSubmit}>
-            <label className="username" for="username">Username:</label>
-            <div className="form-group">
-              <input className="form-control" type="text" name="username" />
-            </div>
-            <label className="company" for="company">Company:</label>
-            <div className="form-group">
-              <input className="form-control" type="text" name="company" />
-            </div>
-            <label className="country" for="country">Country:</label>
-            <div className="form-group">
-              <input className="form-control" type="text" name="country" />
-            </div>
-            <button className="button btn btn-primary btn-lg btn-block">Register</button>
-          </form>
-        </div>
-      </div>
+        <Container>
+          <form className="col-6 offset-3" onSubmit={this.handleFormSubmit}>
+             <FormGroup bsSize="large">
+             <ControlLabel className="username">Username:</ControlLabel>
+               <FormControl
+                 type="text"
+                 name="username"
+                 value={this.state.value}
+                 placeholder="Username"
+               />
+             <ControlLabel className="company">Company:</ControlLabel>
+               <FormControl
+                 type="text"
+                 name="company"
+                 value={this.state.value}
+                 placeholder="Company"
+               />
+             <ControlLabel className="country">Country:</ControlLabel>
+               <FormControl
+                 type="text"
+                 name="country"
+                 value={this.state.value}
+                 placeholder="Country"
+               />
+             <FormControl.Feedback />
+          </FormGroup>
+          <Button className="button btn btn-primary btn-lg btn-block" type="submit">Register</Button>
+       </form>
+     </Container>
     );
   }
 }
