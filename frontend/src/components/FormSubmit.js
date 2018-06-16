@@ -32,7 +32,10 @@ export default class RegisterForm extends React.Component {
     })
     .then((response) => {
       if (response.data.success) {
-        return Swal('You are now registered!').then((result) => {
+        return Swal({
+          title: 'You are now registered!',
+          type: 'success'
+        }).then((result) => {
           history.push(`/users/${response.data.timestamp}`, { timestamp: response.data.timestamp });
           window.location.reload();
         });
