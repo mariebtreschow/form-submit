@@ -1,27 +1,29 @@
 const register = require('../controllers/register');
 const assert = require('chai').assert
 const { Register } = require('../models/db');
+let testUser;
 
-describe('Create User', () => {
-
-  after(() => {
-    return Register.destroy({
-      where: {
-        username: ['marieTest']
-      },
-      truncate: true /* this will ignore where and truncate the table instead */
-    }).then((res) => {
-      console.log('Clean up after tests run..');
-    });
+after(() => {
+  return Register.destroy({
+    where: {
+      username: ['marieTest']
+    },
+    truncate: true /* this will ignore where and truncate the table instead */
+  }).then((res) => {
+    console.log('Clean up after tests run..');
   });
+});
 
+const testData = {
+  username: 'marieTest',
+  company: 'MOBGEN',
+  country: 'Denmark'
+};
+
+describe('Create User =>', () => {
   it('should create a user', (done) => {
-    const data = {
-      username: 'marieTest',
-      company: 'MOBGEN',
-      country: 'Denmark'
-    };
-    register.create(data).then((user) => {
+    register.create(testData).then((user) => {
+      testUser = user;
       assert.isObject(user, 'must return a user object');
       assert.property(user, 'success', 'must have property success');
       assert.property(user, 'error', 'must have property error');
@@ -101,12 +103,22 @@ describe('Create User', () => {
   });
 });
 
-// describe('Get User by timestamp', () => {
-//   it('should get user by its timestamp', (done) => {
-//     done();
-//   });
-//
-//   it('should return not found when providing wrong timestamp', (done) => {
-//     done();
-//   });
-// });
+describe('Get User => ', () => {
+  it('should get user by its timestamp', (done) => {
+    register.get(testUser.timestamp).then((userInDb) => {
+      const user = userInDb.dataValues;
+      assert.equal(user.username, testData.username, 'must match the database');
+      assert.equal(user.company, testData.company, 'must match the database');
+      assert.equal(user.country, testData.country, 'must match the database');
+      done();
+    });
+  });
+  it('should return not found when providing wrong timestamp', (done) => {
+    register.get('123456789').then((userInDb) => {
+      assert.isObject(userInDb, 'must be an object');
+      assert.property(userInDb, 'message', 'must have a message');
+      assert.equal(userInDb.message, 'No user with this timestamp was found');
+      done();
+    });
+  });
+});
