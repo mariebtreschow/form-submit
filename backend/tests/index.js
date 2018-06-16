@@ -3,10 +3,10 @@ const assert = require('chai').assert
 const { Register } = require('../models/db');
 let testUser;
 
-after(() => {
+afterEach(() => {
   return Register.destroy({
     where: {
-      username: ['marieTest']
+      username: ['marieTest', 'marieTest2']
     },
     truncate: true /* this will ignore where and truncate the table instead */
   }).then((res) => {
@@ -14,14 +14,13 @@ after(() => {
   });
 });
 
-const testData = {
-  username: 'marieTest',
-  company: 'MOBGEN',
-  country: 'Denmark'
-};
-
 describe('Create User =>', () => {
   it('should create a user', (done) => {
+    const testData = {
+      username: 'marieTest',
+      company: 'MOBGEN',
+      country: 'Denmark'
+    };
     register.create(testData).then((user) => {
       testUser = user;
       assert.isObject(user, 'must return a user object');
@@ -40,11 +39,13 @@ describe('Create User =>', () => {
       company: 'MOBGEN',
       country: 'Denmark'
     };
-    register.create(data).then((err) => {
-      assert.isObject(err, 'must return a user object');
-      assert.equal(err.message, 'username must be unique');
-      assert.equal(err.type, 'unique violation');
-      done();
+    register.create(data).then(() => {
+      register.create(data).then((err) => {
+        assert.isObject(err, 'must return a user object');
+        assert.equal(err.message, 'username must be unique');
+        assert.equal(err.type, 'unique violation');
+        done();
+      });
     });
   });
   it('should not be able to create a user with too short username', (done) => {
@@ -105,13 +106,21 @@ describe('Create User =>', () => {
 
 describe('Get User => ', () => {
   it('should get user by its timestamp', (done) => {
-    register.get(testUser.timestamp).then((userInDb) => {
-      const user = userInDb.dataValues;
-      assert.equal(user.username, testData.username, 'must match the database');
-      assert.equal(user.company, testData.company, 'must match the database');
-      assert.equal(user.country, testData.country, 'must match the database');
-      done();
+    const testData = {
+      username: 'marieTest2',
+      company: 'MOBGEN',
+      country: 'SWEDEN'
+    };
+    register.create(testData).then((user) => {
+      register.get(user.timestamp).then((userInDb) => {
+        const user = userInDb.dataValues;
+        assert.equal(user.username, testData.username, 'must match the database');
+        assert.equal(user.company, testData.company, 'must match the database');
+        assert.equal(user.country, testData.country, 'must match the database');
+        done();
+      });
     });
+
   });
   it('should return not found when providing wrong timestamp', (done) => {
     register.get('123456789').then((userInDb) => {

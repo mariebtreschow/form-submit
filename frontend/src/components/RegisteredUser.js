@@ -52,60 +52,46 @@ export default class RegisteredUser extends React.Component {
     return (
         <Container className="userInfo">
           <Row>
-            <Col
-              className="col__username"
-              sm={{ size: 6,  offset: 3 }}
-              >
+            <Col className="col__username" sm={{ size: 6,  offset: 3 }}>
               <h4>Username:</h4>
               {this.state.user.username}
             </Col>
           </Row>
           <Row>
-            <Col
-              className="col__company"
-              sm={{ size: 6, offset: 3 }}
-              >
+            <Col className="col__company" sm={{ size: 6, offset: 3 }}>
               <h4>Company:</h4>
               {this.state.user.company}
             </Col>
           </Row>
           <Row>
-            <Col
-              className="col__country"
-              sm={{ size: 6, offset: 3 }}
-              >
+            <Col className="col__country" sm={{ size: 6, offset: 3 }} >
               <h4>Country:</h4>
               {this.state.user.country}
             </Col>
           </Row>
           <Row>
-            <Col
-              sm={{ size: 6, offset: 3 }}
-              >
+            <Col sm={{ size: 6, offset: 3 }}>
               <h4>Created at:</h4>
               {formatDate(this.state.user.createdAt)}
             </Col>
           </Row>
           <Row>
-            <Col
-              sm={{ size: 6, offset: 3 }}
-              >
+            <Col sm={{ size: 6, offset: 3 }}>
               <Button onClick={this.handleClick} className="btn-lg">Go Back</Button>
             </Col>
           </Row>
         </Container>
       );
-    } else {
-      return (
-        <Container className="userNotFound">
-          <Row>
-            <Col sm={{ size: 6,  offset: 3 }}>
-              <p>Sorry! {this.state.message}...</p>
-            </Col>
-          </Row>
-          <Button onClick={this.handleClick}>Go Back</Button>
-        </Container>
-      );
     }
+    return (
+      <Container className="userNotFound">
+        <Row>
+          <Col sm={{ size: 6,  offset: 3 }}>
+            <p>Sorry! {this.state.message}...</p>
+          </Col>
+        </Row>
+        <Button onClick={this.handleClick}>Go Back</Button>
+      </Container>
+    );
   }
 }
