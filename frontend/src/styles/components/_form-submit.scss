@@ -12,9 +12,14 @@
 
 .button.btn.btn-primary.btn-lg.btn-block {
 	background-color: $off-black;
-  border-color: $red;
+  border-color: $light-grey;
 }
 
 label {
   margin-top: 1rem;
+}
+
+
+@media (min-width: $desktop-breakpoint){
+
 }
