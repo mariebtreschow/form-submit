@@ -5,30 +5,30 @@ const _ = require('lodash');
 const validCountries = ['sweden', 'denmark', 'netherlands', 'spain', 'germany', 'france', 'russia', 'belgium', 'finland'];
 
 function create(user) {
-	const errors = {}; 
+	const errors = {};
 	const data = _.pick(user, ['username', 'company', 'country']);
 
 	if (!data.country || !_.isString(data.country)){
-		errors.country = ' Country cannot be empty';
+		errors.country = 'Country cannot be empty';
 	}
 	if (!data.username || !_.isString(data.username)){
-		errors.username = ' Username cannot be empty';
+		errors.username = 'Username cannot be empty';
 	}
-	if (data.username.length < 5){
-		errors.validUsername = ' Username is too short';
+	if (data.username && data.username.length < 5){
+		errors.validUsername = 'Username is too short';
 	}
 	if (!data.company || !_.isString(data.company)){
-		errors.company = ' Company cannot be empty';
+		errors.company = 'Company cannot be empty';
 	}
-	if(!_.includes(validCountries, data.country.toLowerCase())) {
-		errors.validCountry = ' Not a valid country';
+	if(data.country && !_.includes(validCountries, data.country.toLowerCase())) {
+		errors.validCountry = 'Not a valid country';
 	}
 	if (!_.isEmpty(errors)){
 		throw error.createError(403, 'There are some validation issues', errors);
 	}
 	try {
 		return registerModel.createUser(data);
-	} catch(err) {
+	} catch (err) {
 		Promise.reject(err);
 	}
 }
@@ -37,7 +37,7 @@ function get(timestamp) {
 	const date = new Date(timestamp);
 	try {
 		return registerModel.getUser(date);
-	} catch(err) {
+	} catch (err) {
 		Promise.reject(err);
 	}
 }

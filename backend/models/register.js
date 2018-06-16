@@ -1,4 +1,4 @@
-const { sequelize, Register } = require('./db');
+const { Register } = require('./db');
 
 function createUser(user) {
   return Register.create(user)
