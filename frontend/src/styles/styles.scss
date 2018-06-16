@@ -33,8 +33,10 @@
 @import "../../node_modules/bootstrap/scss/carousel";
 @import "../../node_modules/bootstrap/scss/utilities";
 @import "../../node_modules/bootstrap/scss/print";
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import './base/settings';
 @import './base/base';
 @import './components/header';
+@import './components/form-submit';
 @import './components/registerd-user';

@@ -1,6 +1,6 @@
 
 const generateDetailsHTML = (details) => {
-  let detailsHTML = `</br><ul style="overflow-y:auto;height:3.5rem;margin:0.800rem 0 0 0;
+  let detailsHTML = `</br><ul style="overflow-y:auto;height:3.8rem;margin:0.800rem 0 0 0;
   text-align: start;padding-left:8rem;">`;
     _.each(details, (detail) => {
       detailsHTML += `<li style="font-size:1rem">

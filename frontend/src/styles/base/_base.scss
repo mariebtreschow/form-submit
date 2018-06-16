@@ -4,30 +4,9 @@ body {
   color: $off-white;
 }
 
-label {
-  margin-top: 1rem;
-}
-
-.button.btn.btn-primary.btn-lg.btn-block {
-	background-color: $off-black;
-  border-color: $red;
-}
-
 .not-found {
   text-align: center;
   font-family: sans-serif;
   font-size: $s-size;
   color: red;
-}
-
-.username {
-  font-size: $s-size;
-}
-
-.company {
-  font-size: $s-size;
-}
-
-.country {
-  font-size: $s-size;
 }
