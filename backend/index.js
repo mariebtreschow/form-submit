@@ -7,6 +7,8 @@ const register = require('./controllers/register');
 const timeout = require('connect-timeout');
 const cors = require('cors');
 
+const { sequelize } = require('./models/db');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(timeout('5s'));
@@ -43,4 +45,6 @@ app.use((req, res, next) => {
    });
 });
 
-app.listen(port, () => console.log('Magic is happening on ' + port));
+sequelize.sync({ force: false }).then(() => {
+  app.listen(port, () => console.log('Magic is happening on ' + port));
+});

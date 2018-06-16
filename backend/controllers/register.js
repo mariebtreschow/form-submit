@@ -20,7 +20,7 @@ function create(user) {
 	if (!data.company || !_.isString(data.company)){
 		errors.company = 'Company cannot be empty';
 	}
-	if(data.country && !_.includes(validCountries, data.country.toLowerCase())) {
+	if (data.country && !_.includes(validCountries, data.country.toLowerCase())) {
 		errors.validCountry = 'Not a valid country';
 	}
 	if (!_.isEmpty(errors)){
