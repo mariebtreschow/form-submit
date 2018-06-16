@@ -30,8 +30,8 @@ You are going to have to install the node modules for both backend and frontend.
 
 To get the backend up and running on port 8080 you execute following command from backend folder:
 
-
 `npm start`
+
 Then to run the frontend you have to install the node modules here as well with:
 
 `npm install`
