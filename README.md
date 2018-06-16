@@ -29,11 +29,11 @@ Run the app locally
 
 `npm install`
 
-To get the backend up and running on port 8080 you execute following command from backend folder:
+2. To get the backend up and running on port 8080 you execute following command from backend folder:
 
 `npm start`
 
-Then you want to run the frontend with the following command executed from frontend folder:
+3. Then you want to run the frontend with the following command executed from frontend folder:
 
 `npm run dev-server`
 
