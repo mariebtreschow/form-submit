@@ -1,17 +1,19 @@
 {
-  "name": "upinionassignment",
+  "name": "form-submit",
   "version": "1.0.0",
-  "description": "Upinion backend + frontend assignment",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --experimental-modules index.js"
+    "start": "nodemon --experimental-modules index.js"
   },
   "author": "Upinion",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
-    "sequelize": "^4.37.10",
+    "body-parser": "1.18.3",
+    "connect-timeout": "1.9.0",
+    "cors": "2.8.4",
+    "express": "4.16.3",
+    "sequelize": "4.37.10",
     "sqlite3": "3.1.9"
   }
 }
