@@ -33,9 +33,10 @@ export default class RegisterForm extends React.Component {
     })
     .then((response) => {
       if (response.data.success) {
-        history.push(`/users/${response.data.timestamp}`, { timestamp: response.data.timestamp });
-        window.location.reload();
-        return Swal('You are now registered!');
+        return Swal('You are now registered!').then((result) => {
+          history.push(`/users/${response.data.timestamp}`, { timestamp: response.data.timestamp });
+          window.location.reload();
+        });
       }
       if (response.data.type === 'unique violation') {
         return Swal({
@@ -44,7 +45,6 @@ export default class RegisterForm extends React.Component {
           text: response.data.message,
         });
       }
-
     }).catch((error) => {
       this.setState({
         error: error.response
