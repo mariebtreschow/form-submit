@@ -4,8 +4,8 @@ import Swal from 'sweetalert2';
 import RegisteredUser from './RegisteredUser';
 import { FormGroup, Button, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import { Container} from 'reactstrap';
-import _ from 'lodash';
 import generateMessage from '../lib/error-handler';
+import _ from 'lodash';
 
 export default class RegisterForm extends React.Component {
 
@@ -52,7 +52,7 @@ export default class RegisterForm extends React.Component {
         const listErrors = _.map(error.response.data.error.extra, values => values);
         return Swal({
           type: 'error',
-          title: 'Validation issues',
+          title: 'Oops, take another look',
           html: generateMessage(message, listErrors),
         });
       }
