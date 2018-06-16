@@ -1,15 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Redirect } from 'react-router';
-import RegisteredUser from './RegisteredUser';
 import { FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import { Container} from 'reactstrap';
 import generateMessage from '../lib/error-handler';
-import _ from 'lodash';
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory();
+import _ from 'lodash';
 
 export default class RegisterForm extends React.Component {
 
