@@ -32,7 +32,6 @@ describe('Create User', () => {
       done();
     });
   });
-
   it('should not be able to create a user with the same username', (done) => {
     const data = {
       username: 'marieTest',
@@ -46,14 +45,68 @@ describe('Create User', () => {
       done();
     });
   });
+  it('should not be able to create a user with too short username', (done) => {
+    const data = {
+      username: 'm',
+      company: 'MOBGEN',
+      country: 'Denmark'
+    };
+    try {
+      register.create(data);
+    } catch (err) {
+      assert.isObject(err, 'must return a user object');
+      assert.property(err.error.extra, 'validUsername', 'must have property validUsername');
+      assert.equal(err.error.extra.validUsername, 'Username is too short');
+      assert.equal(err.error.message, 'There are some validation issues');
+      assert.equal(err.error.success, false, 'success must be false');
+      assert.equal(err.error.status, 403, 'status must be 403');
+      done();
+    }
+  });
+  it('should not be able to create a user with a not valid country', (done) => {
+    const data = {
+      username: 'marieTest',
+      company: 'MOBGEN',
+      country: 'USA'
+    };
+    try {
+      register.create(data);
+    } catch (err) {
+      assert.isObject(err, 'must return a user object');
+      assert.property(err.error.extra, 'validCountry', 'must have property validCountry');
+      assert.equal(err.error.extra.validCountry, 'Not a valid country');
+      assert.equal(err.error.message, 'There are some validation issues');
+      assert.equal(err.error.success, false, 'success must be false');
+      assert.equal(err.error.status, 403, 'status must be 403');
+      done();
+    }
+  });
+  it('should not be able to create a user without any data', (done) => {
+    const data = {};
+    try {
+      register.create(data);
+    } catch (err) {
+      assert.isObject(err, 'must return a user object');
+      assert.property(err.error.extra, 'country', 'must have property country');
+      assert.property(err.error.extra, 'company', 'must have property company');
+      assert.property(err.error.extra, 'username', 'must have property username');
+      assert.equal(err.error.extra.company, 'Company cannot be empty');
+      assert.equal(err.error.extra.country, 'Country cannot be empty');
+      assert.equal(err.error.extra.username, 'Username cannot be empty');
+      assert.equal(err.error.message, 'There are some validation issues');
+      assert.equal(err.error.success, false, 'success must be false');
+      assert.equal(err.error.status, 403, 'status must be 403');
+      done();
+    }
+  });
 });
 
-describe('Get User by timestamp', () => {
-  it('should get user by its timestamp', (done) => {
-    done();
-  });
-
-  it('should return not found when providing wrong timestamp', (done) => {
-    done();
-  });
-});
+// describe('Get User by timestamp', () => {
+//   it('should get user by its timestamp', (done) => {
+//     done();
+//   });
+//
+//   it('should return not found when providing wrong timestamp', (done) => {
+//     done();
+//   });
+// });
