@@ -5,7 +5,7 @@ const _ = require('lodash');
 const validCountries = ['sweden', 'denmark', 'netherlands', 'spain', 'germany', 'france', 'russia', 'belgium', 'finland'];
 
 function create(user) {
-	const errors = {}; // refactor this
+	const errors = {}; 
 	const data = _.pick(user, ['username', 'company', 'country']);
 
 	if (!data.country || !_.isString(data.country)){
@@ -13,6 +13,9 @@ function create(user) {
 	}
 	if (!data.username || !_.isString(data.username)){
 		errors.username = ' Username cannot be empty';
+	}
+	if (data.username.length < 5){
+		errors.validUsername = ' Username is too short';
 	}
 	if (!data.company || !_.isString(data.company)){
 		errors.company = ' Company cannot be empty';

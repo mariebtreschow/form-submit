@@ -1,6 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import { Container, Row, Col } from 'reactstrap';
 import _ from 'lodash';
+
+const validateUser = (user) => {
+  if(user.username && user.company && user.country && user.createdAt) {
+    return true;
+  }
+  return false;
+};
 
 export default class RegisteredUser extends React.Component {
 
@@ -17,10 +25,12 @@ export default class RegisteredUser extends React.Component {
       let userInDb = user.data;
       if (userInDb.message) {
         this.setState({
-          message : user.data.message
+          message : userInDb.message
         });
       }
-      this.setState({ user : userInDb });
+      if (validateUser(userInDb)){
+        this.setState({ user : userInDb });
+      }
     }).catch((error) => {
       console.log(error);
     });
@@ -28,9 +38,33 @@ export default class RegisteredUser extends React.Component {
 
   render = () => {
     return (
-      <div className="user">
-        <p>Welcome {this.state.user ? this.state.user.username : this.state.message}! You are nor registed</p>
-      </div>
+      <Container className="userInfo">
+        <Row>
+          <Col sm={{ size: 6,  offset: 3 }}
+            >
+            <h4>Username:</h4>
+            {this.state.user ? this.state.user.username : this.state.message}
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ size: 6, offset: 3 }}>
+            <h4>Company:</h4>
+            {this.state.user ? this.state.user.company : this.state.message}
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ size: 6, offset: 3 }}>
+            <h4>Country:</h4>
+            {this.state.user ? this.state.user.country : this.state.message}
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={{ size: 6, offset: 3 }}>
+            <h4>CreatedAt:</h4>
+            {this.state.user ? this.state.user.createdAt : this.state.message}
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
