@@ -1,7 +1,6 @@
 const register = require('../controllers/register');
 const assert = require('chai').assert
 const { Register } = require('../models/db');
-let testUser;
 
 afterEach(() => {
   return Register.destroy({

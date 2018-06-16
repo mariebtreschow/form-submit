@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/index.js",
-    "start": "nodemon --experimental-modules index.js"
+    "start": "nodemon index.js"
   },
   "author": "Upinion",
   "license": "ISC",
