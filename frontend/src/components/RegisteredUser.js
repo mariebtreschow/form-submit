@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
+import createHistory from 'history/createBrowserHistory';
+const history = createHistory();
 import _ from 'lodash';
 
 const validateUser = (user) => {
-  if(user.username && user.company && user.country && user.createdAt) {
-    return true;
-  }
-  return false;
+  return (user.username && user.company && user.country && user.createdAt) ? true : false;
 };
 
 const formatDate = (date) => {
@@ -39,6 +39,11 @@ export default class RegisteredUser extends React.Component {
     }).catch((error) => {
       console.log(error);
     });
+  }
+
+  handleClick = () => {
+    history.push(`/users`, { timestamp: null });
+    window.location.reload();
   }
 
   render = () => {
@@ -80,6 +85,13 @@ export default class RegisteredUser extends React.Component {
               {formatDate(this.state.user.createdAt)}
             </Col>
           </Row>
+          <Row>
+            <Col
+              sm={{ size: 6, offset: 3 }}
+              >
+              <Button onClick={this.handleClick} className="btn-lg">Go Back</Button>
+            </Col>
+          </Row>
         </Container>
       );
     }
@@ -87,10 +99,10 @@ export default class RegisteredUser extends React.Component {
       <Container className="userNotFound">
         <Row>
           <Col sm={{ size: 6,  offset: 3 }}>
-            <p>Sorry! {this.state.message}..</p>
+            <p>Sorry! {this.state.message}...</p>
           </Col>
         </Row>
-        <Button href="/users">Go Back</Button>
+        <Button onClick={this.handleClick}>Go Back</Button>
       </Container>
     );
   }
