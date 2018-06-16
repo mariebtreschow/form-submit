@@ -7,8 +7,6 @@ const register = require('./controllers/register');
 const timeout = require('connect-timeout');
 const cors = require('cors');
 
-const { sequelize, Register } = require('./models/db');
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(timeout('5s'));
