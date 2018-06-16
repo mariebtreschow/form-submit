@@ -1,11 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Redirect } from 'react-router';
 import RegisteredUser from './RegisteredUser';
-import { FormGroup, Button, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import { FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import { Container} from 'reactstrap';
 import generateMessage from '../lib/error-handler';
 import _ from 'lodash';
+import createHistory from 'history/createBrowserHistory'
+const history = createHistory();
 
 export default class RegisterForm extends React.Component {
 
@@ -30,9 +34,11 @@ export default class RegisterForm extends React.Component {
       country: country
     })
     .then((response) => {
-      this.setState({
-        timestamp: response.data.timestamp
-      });
+      if (response.data.success) {
+        history.push(`/users/${response.data.timestamp}`, { timestamp: response.data.timestamp });
+        window.location.reload();
+        return Swal('You are now registered!');
+      }
       if (response.data.type === 'unique violation') {
         return Swal({
           type: 'error',
@@ -40,9 +46,7 @@ export default class RegisterForm extends React.Component {
           text: response.data.message,
         });
       }
-      if (response.data.success) {
-        return Swal('You are now registered!');
-      }
+
     }).catch((error) => {
       this.setState({
         error: error.response
@@ -60,11 +64,6 @@ export default class RegisterForm extends React.Component {
   }
 
   render = () => {
-    if (this.state.timestamp) {
-      return (
-        <RegisteredUser timestamp={this.state.timestamp}/>
-      );
-    }
     return (
         <Container>
           <form className="col-6 offset-3" onSubmit={this.handleFormSubmit}>
@@ -90,8 +89,7 @@ export default class RegisterForm extends React.Component {
                  value={this.state.value}
                  placeholder="Country"
                />
-             <FormControl.Feedback />
-          </FormGroup>
+             </FormGroup>
           <Button className="button btn btn-primary btn-lg btn-block" type="submit">Register</Button>
        </form>
      </Container>
