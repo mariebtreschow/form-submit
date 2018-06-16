@@ -10,6 +10,11 @@ const validateUser = (user) => {
   return false;
 };
 
+const formatDate = (date) => {
+  date = (new Date(date)).toUTCString();
+  return date;
+};
+
 export default class RegisteredUser extends React.Component {
 
   constructor(props){
@@ -60,8 +65,8 @@ export default class RegisteredUser extends React.Component {
         </Row>
         <Row>
           <Col sm={{ size: 6, offset: 3 }}>
-            <h4>CreatedAt:</h4>
-            {this.state.user ? this.state.user.createdAt : this.state.message}
+            <h4>Created at:</h4>
+            {this.state.user ? formatDate(this.state.user.createdAt) : this.state.message}
           </Col>
         </Row>
       </Container>
