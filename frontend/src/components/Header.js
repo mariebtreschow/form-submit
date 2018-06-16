@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 const Header = () => (
-  <div>
+  <div className="header">
     <h1>Register App</h1>
   </div>
 );
