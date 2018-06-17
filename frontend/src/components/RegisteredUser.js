@@ -11,7 +11,7 @@ const validateUser = (user) => {
 };
 
 const formatDate = (date) => {
-  return (new Date(date)).toUTCString();
+  return (new Date(date)).toString();
 };
 
 export default class RegisteredUser extends React.Component {
