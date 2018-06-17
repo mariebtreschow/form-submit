@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "form-submit-upinion",
+=======
+  "name": "form-submit",
+>>>>>>> develop
   "version": "1.0.0",
   "description": "Register User ==============",
   "main": "index.js",
@@ -10,7 +14,11 @@
     "type": "git",
     "url": "git+https://github.com/mariebtreschow/form-submit.git"
   },
+<<<<<<< HEAD
   "author": "Marie Treschow",
+=======
+  "author": "",
+>>>>>>> develop
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mariebtreschow/form-submit/issues"
