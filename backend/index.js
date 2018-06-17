@@ -19,13 +19,13 @@ function haltOnTimedout (req, res, next) {
   if (!req.timedout) next();
 }
 
-app.get('/users/:timestamp', (req, res) => {
+app.get('/api/users/:timestamp', (req, res) => {
   register.get(Number(req.params.timestamp)).then((user) => {
     res.send(user);
   });
 });
 
-app.post('/users', (req, res) => {
+app.post('/api/users', (req, res) => {
   register.create(req.body).then((user) => {
     res.send(user);
   });
