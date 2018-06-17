@@ -24,7 +24,7 @@ export default class RegisterForm extends React.Component {
     const company = e.target.elements.company.value.trim();
     const username = e.target.elements.username.value.trim();
 
-    axios.post(`${process.env.BACKEND_HOST}/users`, {
+    axios.post(`${process.env.BACKEND_HOST}/api/users`, {
       username: username,
       company: company,
       country: country
@@ -35,7 +35,7 @@ export default class RegisterForm extends React.Component {
           title: 'You are now registered!',
           type: 'success'
         }).then((result) => {
-          history.push(`/api/users/${response.data.timestamp}`, { timestamp: response.data.timestamp });
+          history.push(`/users/${response.data.timestamp}`);
           window.location.reload();
         });
       }

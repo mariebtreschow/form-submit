@@ -24,7 +24,7 @@ export default class RegisteredUser extends React.Component {
   }
 
   componentDidMount = () => {
-    axios.get(`${process.env.BACKEND_HOST}/api/users/${this.props.timestamp ? this.props.timestamp : this.props.match.params.id}`)
+    axios.get(`${process.env.BACKEND_HOST}/api/users/${this.props.match.params.id}`)
     .then((user) => {
       let userInDb = user.data;
 
