@@ -35,7 +35,7 @@ export default class RegisterForm extends React.Component {
           title: 'You are now registered!',
           type: 'success'
         }).then((result) => {
-          history.push(`/users/${response.data.timestamp}`, { timestamp: response.data.timestamp });
+          history.push(`/api/users/${response.data.timestamp}`, { timestamp: response.data.timestamp });
           window.location.reload();
         });
       }
