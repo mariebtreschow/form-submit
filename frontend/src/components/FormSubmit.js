@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Redirect } from 'react-router';
 import { FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import { Container } from 'reactstrap';
 import generateMessage from '../lib/error-handler';

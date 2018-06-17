@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
-import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
 import createHistory from 'history/createBrowserHistory';
 const history = createHistory();
@@ -37,7 +36,7 @@ export default class RegisteredUser extends React.Component {
       }
     }).catch((error) => {
       this.setState({
-        message : 'Something happened while retrieving the user!'
+        message : `Something happened while retrieving the user!`
       });
     });
   }
