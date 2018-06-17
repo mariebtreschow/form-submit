@@ -14,11 +14,11 @@ function create(user) {
 	if (!data.username || !_.isString(data.username)){
 		errors.username = 'Username cannot be empty';
 	}
-	if (data.username && data.username.length < 5){
-		errors.validUsername = 'Username is too short';
-	}
 	if (!data.company || !_.isString(data.company)){
 		errors.company = 'Company cannot be empty';
+	}
+	if (data.username && data.username.length < 5){
+		errors.validUsername = 'Username is too short';
 	}
 	if (data.country && !_.includes(validCountries, data.country.toLowerCase())) {
 		errors.validCountry = 'Not a valid country';

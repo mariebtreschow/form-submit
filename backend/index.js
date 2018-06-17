@@ -45,6 +45,6 @@ app.use((req, res, next) => {
    });
 });
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync().then(() => {
   app.listen(port, () => console.log('Magic is happening on ' + port));
 });
