@@ -23,7 +23,7 @@ export default class RegisteredUser extends React.Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     axios.get(`${process.env.BACKEND_HOST}/api/users/${this.props.match.params.id}`)
     .then((user) => {
       let userInDb = user.data;
@@ -41,12 +41,12 @@ export default class RegisteredUser extends React.Component {
     });
   }
 
-  handleClick = () => {
+  handleClick() {
     history.push(`/users`, { timestamp: null });
     window.location.reload();
   }
 
-  render = () => {
+  render() {
     if (this.state.user) {
     return (
         <Container className="userInfo">

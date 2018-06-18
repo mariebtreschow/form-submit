@@ -18,7 +18,7 @@ export default class RegisterForm extends React.Component {
     }
   }
 
-  handleFormSubmit = (e) => {
+  handleFormSubmit(e) {
     e.preventDefault();
     const country = e.target.elements.country.value.trim();
     const company = e.target.elements.company.value.trim();
@@ -62,7 +62,7 @@ export default class RegisterForm extends React.Component {
     });
   }
 
-  render = () => {
+  render() {
     return (
         <Container>
           <form className="col-8 offset-2" onSubmit={this.handleFormSubmit}>
