@@ -18,13 +18,13 @@ export default class RegisterForm extends React.Component {
     }
   }
 
-  handleFormSubmit = (e) => {
+  handleFormSubmit(e) {
     e.preventDefault();
     const country = e.target.elements.country.value.trim();
     const company = e.target.elements.company.value.trim();
     const username = e.target.elements.username.value.trim();
 
-    axios.post(`${process.env.BACKEND_HOST}/users`, {
+    axios.post(`${process.env.BACKEND_HOST}/api/users`, {
       username: username,
       company: company,
       country: country
@@ -35,7 +35,7 @@ export default class RegisterForm extends React.Component {
           title: 'You are now registered!',
           type: 'success'
         }).then((result) => {
-          history.push(`/users/${response.data.timestamp}`, { timestamp: response.data.timestamp });
+          history.push(`/users/${response.data.timestamp}`);
           window.location.reload();
         });
       }
@@ -62,7 +62,7 @@ export default class RegisterForm extends React.Component {
     });
   }
 
-  render = () => {
+  render() {
     return (
         <Container>
           <form className="col-8 offset-2" onSubmit={this.handleFormSubmit}>

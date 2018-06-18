@@ -61,7 +61,7 @@ describe('Create User =>', () => {
       assert.equal(err.error.extra.validUsername, 'Username is too short');
       assert.equal(err.error.message, 'There are some validation issues');
       assert.equal(err.error.success, false, 'success must be false');
-      assert.equal(err.error.status, 403, 'status must be 403');
+      assert.equal(err.error.status, 400, 'status must be 400');
       done();
     }
   });
@@ -79,7 +79,7 @@ describe('Create User =>', () => {
       assert.equal(err.error.extra.validCountry, 'Not a valid country');
       assert.equal(err.error.message, 'There are some validation issues');
       assert.equal(err.error.success, false, 'success must be false');
-      assert.equal(err.error.status, 403, 'status must be 403');
+      assert.equal(err.error.status, 400, 'status must be 400');
       done();
     }
   });
@@ -97,7 +97,7 @@ describe('Create User =>', () => {
       assert.equal(err.error.extra.username, 'Username cannot be empty');
       assert.equal(err.error.message, 'There are some validation issues');
       assert.equal(err.error.success, false, 'success must be false');
-      assert.equal(err.error.status, 403, 'status must be 403');
+      assert.equal(err.error.status, 400, 'status must be 400');
       done();
     }
   });

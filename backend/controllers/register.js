@@ -24,7 +24,7 @@ function create(user) {
 		errors.validCountry = 'Not a valid country';
 	}
 	if (!_.isEmpty(errors)){
-		throw error.createError(403, 'There are some validation issues', errors);
+		throw error.createError(400, 'There are some validation issues', errors);
 	}
 	try {
 		return registerModel.createUser(data);

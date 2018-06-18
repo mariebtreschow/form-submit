@@ -11,7 +11,7 @@ const validateUser = (user) => {
 };
 
 const formatDate = (date) => {
-  return (new Date(date)).toUTCString();
+  return (new Date(date)).toString();
 };
 
 export default class RegisteredUser extends React.Component {
@@ -23,8 +23,8 @@ export default class RegisteredUser extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    axios.get(`${process.env.BACKEND_HOST}/users/${this.props.timestamp ? this.props.timestamp : this.props.match.params.id}`)
+  componentDidMount() {
+    axios.get(`${process.env.BACKEND_HOST}/api/users/${this.props.match.params.id}`)
     .then((user) => {
       let userInDb = user.data;
 
@@ -41,12 +41,12 @@ export default class RegisteredUser extends React.Component {
     });
   }
 
-  handleClick = () => {
+  handleClick() {
     history.push(`/users`, { timestamp: null });
     window.location.reload();
   }
 
-  render = () => {
+  render() {
     if (this.state.user) {
     return (
         <Container className="userInfo">
